@@ -1,0 +1,17 @@
+[
+  {
+    "front": "hello",
+    "back": "world",
+    "learned": false
+  },
+  {
+    "front": "foo",
+    "back": "bar",
+    "learned": true
+  },
+  {
+    "front": "day",
+    "back": "night",
+    "learned": false
+  }
+]
