@@ -42,9 +42,25 @@ func main() {
 	order := rand.Perm(len(deck))
 	for _, i := range order {
 		card := deck[i]
-		fmt.Print(card.Front)
+		var a string
+		var b string
+		if reverse {
+			if rand.Intn(2) == 0 {
+				a = card.Front
+				b = card.Back
+			} else {
+				a = card.Back
+				b = card.Front
+			}
+		} else {
+			a = card.Front
+			b = card.Back
+		}
+		fmt.Print(a)
+		fmt.Print("\n")
 		bufio.NewReader(os.Stdin).ReadBytes('\n')
-		fmt.Print(card.Back)
+		fmt.Print(b)
+		fmt.Print("\n")
 		bufio.NewReader(os.Stdin).ReadBytes('\n')
 	}
 }
