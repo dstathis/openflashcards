@@ -17,7 +17,7 @@ var sessions map[int]*Session = make(map[int]*Session)
 var nextSessionId int = 0
 
 type Session struct {
-	deck []Card
+	deck    []Card
 	curCard int
 	curSide int
 }
@@ -75,17 +75,17 @@ func (session *Session) next() string {
 }
 
 type TomlConfig struct {
-	Deck    map[string]string `toml:"deck"`
+	Deck map[string]string `toml:"deck"`
 }
 
 type Card struct {
-	Front   string
-	Back    string
+	Front string
+	Back  string
 }
 
 type Page struct {
 	CardText string
-	Link string
+	Link     string
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
