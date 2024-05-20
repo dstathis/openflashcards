@@ -1,4 +1,2 @@
 github.com/BurntSushi/toml v1.3.2 h1:o7IhLm0Msx3BaB+n3Ag7L8EVlByGnpq14C4YWiu/gL8=
 github.com/BurntSushi/toml v1.3.2/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
-github.com/tsuru/gnuflag v0.0.0-20151217162021-86b8c1b864aa h1:JlLQP1xa13a994p/Aau2e3K9xXYaHNoNvTDVIMHSUa4=
-github.com/tsuru/gnuflag v0.0.0-20151217162021-86b8c1b864aa/go.mod h1:UibOSvkMFKRe/eiwktAPAvQG8L+p8nYsECJvu3Dgw7I=
