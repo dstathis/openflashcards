@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -10,6 +9,8 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/BurntSushi/toml"
 )
 
 var sessions map[int]*Session = make(map[int]*Session)
@@ -21,7 +22,7 @@ type Session struct {
 	curSide int
 }
 
-func getDeckJson(addr string) ([]byte, error) {
+func getDeckToml(addr string) ([]byte, error) {
 	response, err := http.Get(addr)
 	if err != nil {
 		fmt.Println("get_error")
@@ -36,14 +37,18 @@ func getDeckJson(addr string) ([]byte, error) {
 }
 
 func (session *Session) loadDeck(deckAddress string) error {
-	deckString, err := getDeckJson(deckAddress)
+	deckString, err := getDeckToml(deckAddress)
+	if err != nil {
+		return err
+	}
+	var tomlConfig TomlConfig
+	err = toml.Unmarshal(deckString, &tomlConfig)
 	if err != nil {
 		return err
 	}
 	var orderedDeck []Card
-	err = json.Unmarshal(deckString, &orderedDeck)
-	if err != nil {
-		return err
+	for front, back := range tomlConfig.Deck {
+		orderedDeck = append(orderedDeck, Card{front, back})
 	}
 	deckLength := len(orderedDeck)
 	session.deck = make([]Card, deckLength, deckLength)
@@ -69,10 +74,13 @@ func (session *Session) next() string {
 	return text
 }
 
+type TomlConfig struct {
+	Deck    map[string]string `toml:"deck"`
+}
+
 type Card struct {
-	Front   string `json:"front"`
-	Back    string `json:"back"`
-	Learned bool   `json:"learned"`
+	Front   string
+	Back    string
 }
 
 type Page struct {
